@@ -203,6 +203,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final desiredTop = screenHeight * 0.27; //70 percent of the screen
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -226,12 +228,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                   //top container to house results display
                   width: MediaQuery.of(context).size.width,
-                  height: 270,
+                  height: screenHeight * 0.3,
                   color: const Color.fromARGB(255, 35, 37, 45),
                   child: Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.all(23),
+                        padding: const EdgeInsets.only(right: 20, bottom: 30),
                         child: Text(
                           //need to change the text to be responsive so that
                           //will probablt include removing the const in the
@@ -255,14 +257,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 // change it to relative positions.
                 left: 0,
                 right: 0,
-                top: 250,
+                top: desiredTop, //250 works for this,
                 child: Container(
                   //Lower contianer to house calculator buttons
                   //use elevated buttons to make them more noticeable
                   //try to play around to get the make the buttons respective
                   //of each other and the container
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 1.553,
+                  height: screenHeight / 0.7,
                   decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 42, 45, 53),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
