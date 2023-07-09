@@ -56,10 +56,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String currentCalculationSTR = "0";
-  num currentCalculation =
-      0; /*I am using nums as I need to switch back and 
-  *forth between decimals and integers.*/
-  num prevCalc = 0; /*Same thing here*/
+  num currentCalculation = 0; //I am using nums as I need to switch back and
+  //forth between decimals and integers.
+  num prevCalc = 0; //Same thing here
   bool calcState =
       false; // This determines the calculation state, I forget the function
   bool buttonPressed = false;
