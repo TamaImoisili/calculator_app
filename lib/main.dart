@@ -56,9 +56,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String currentCalculationSTR = "0";
-  num currentCalculation = 0;
-  num prevCalc = 0;
-  bool calcState = false;
+  num currentCalculation =
+      0; /*I am using nums as I need to switch back and 
+  *forth between decimals and integers.*/
+  num prevCalc = 0; /*Same thing here*/
+  bool calcState =
+      false; // This determines the calculation state, I forget the function
   bool buttonPressed = false;
   String clear = "AC";
   String prevFunction = "";
@@ -66,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _doSomething() {}
 
   void _ac() {
+    //Adjusts the AC button to clear and vice versa as inputs are entered
     setState(() {
       if (clear == "C") {
         prevCalc = 0;
@@ -81,13 +85,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _addNumber(String num) {
+    // adds a number to the current value
     setState(() {
       buttonPressed = false;
       clear = "C";
       if (calcState) {
         currentCalculationSTR = "";
         currentCalculationSTR += num;
-        currentCalculation = int.parse(currentCalculationSTR);
+        try {
+          currentCalculation = int.parse(currentCalculationSTR);
+        } catch (e) {
+          currentCalculation = double.parse(currentCalculationSTR);
+        }
         calcState = false;
       } else {
         if (currentCalculationSTR == "0") {
@@ -104,17 +113,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _addDecimal() {
+    //adds a decimal to the display but not the actual value yet.
     setState(() {
       currentCalculationSTR += ".";
     });
   }
 
   void _performCalc(String desiredFunction) {
-    //fix the currentCalculation = prevCalc; because this does not make sense
-    //as currentCalcuation and prevCalc are essentially doing opposite things
-    //only update prevCalc when the currentCalc has changed.
+    /*An issue with calculation occurs when you use the app as the it often
+    *confuses the previous and current calculations when you enter a value 
+    *and press button it performs a calculation when you do not want to
+    *perform one.*/
     setState(() {
       if (desiredFunction == "+") {
+        //addition function that adds the previous to the current calc
         buttonPressed = true;
         if (prevCalc == 0) {
           prevCalc = currentCalculation;
@@ -126,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
         calcState = true;
         prevFunction = "+";
       } else if (desiredFunction == "-") {
+        //subtraction function that adds the previous to the current calc
         buttonPressed = true;
         if (prevCalc == 0) {
           prevCalc = currentCalculation;
@@ -137,6 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
         calcState = true;
         prevFunction = "-";
       } else if (desiredFunction == "x") {
+        //multiplication function that multiplies the previous to the current calc
         buttonPressed = true;
         if (prevCalc == 0) {
           prevCalc = currentCalculation;
@@ -152,6 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
         calcState = true;
         prevFunction = "x";
       } else if (desiredFunction == "÷") {
+        //division isn't handled properly needs to be fixed
         buttonPressed = true;
         if (prevCalc == 0) {
           prevCalc = currentCalculation;
@@ -167,7 +182,10 @@ class _MyHomePageState extends State<MyHomePage> {
         calcState = true;
         prevFunction = "÷";
       } else if (desiredFunction == "=") {
-        buttonPressed = true;
+        //equals to fucntion this does the does function that was previously
+        //done
+        buttonPressed = true; // useless right now might need it to know if a
+        //function was previously pressed
         if (prevFunction == "+") {
           prevCalc += currentCalculation;
           currentCalculationSTR = prevCalc.toString();
@@ -203,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenHeight = MediaQuery.of(context).size.height; //screen height
     final desiredTop = screenHeight * 0.27; //70 percent of the screen
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -222,6 +240,8 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Stack(
           children: [
             Positioned(
+              //position the top container above the bottom one so they
+              //align properly
               left: 0,
               right: 0,
               top: 0,
