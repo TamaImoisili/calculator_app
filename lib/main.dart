@@ -326,6 +326,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding: const EdgeInsets.only(
                                   left: 12, right: 12, top: 40),
                               child: ElevatedButton(
+                                //add function to +/-
                                 onPressed: _doSomething,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
@@ -353,6 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding: const EdgeInsets.only(
                                   left: 12, right: 12, top: 40),
                               child: ElevatedButton(
+                                //add function to %
                                 onPressed: _doSomething,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
@@ -782,6 +784,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Expanded(
                             flex: 1,
                             child: Padding(
+                              //add function to the undo
                               padding: const EdgeInsets.only(
                                   left: 12, right: 12, top: 40),
                               child: ElevatedButton(
